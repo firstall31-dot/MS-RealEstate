@@ -97,7 +97,7 @@ function ProjectPage() {
             <aside className="rounded-2xl bg-card border border-border p-6 shadow-lg h-fit">
               <h3 className="font-semibold mb-3">{t("projects.tech")}</h3>
               <ul className="flex flex-wrap gap-2">
-                {project.tech.map((tech) => (
+                {project.tech.map((tech: string) => (
                   <li key={tech} className="text-xs px-2.5 py-1 rounded-full bg-muted font-medium">{tech}</li>
                 ))}
               </ul>
