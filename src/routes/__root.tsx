@@ -69,6 +69,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "M.Said Portfolio" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "M.Said — Real Estate Frontend Developer" },
+      { name: "twitter:title", content: "M.Said — Real Estate Frontend Developer" },
+      { property: "og:description", content: "Portfolio of Mostafa Said — senior frontend engineer specializing in real estate platforms." },
+      { name: "twitter:description", content: "Portfolio of Mostafa Said — senior frontend engineer specializing in real estate platforms." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/286b056a-0b4b-4f66-be64-effd71764a21/id-preview-b73c858c--5d30ae11-1134-4b8a-a914-2109c49c5c54.lovable.app-1780194676925.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/286b056a-0b4b-4f66-be64-effd71764a21/id-preview-b73c858c--5d30ae11-1134-4b8a-a914-2109c49c5c54.lovable.app-1780194676925.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
