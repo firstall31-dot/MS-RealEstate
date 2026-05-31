@@ -1,0 +1,148 @@
+export type Lang = "en" | "ar";
+
+const en = {
+  "nav.home": "Home",
+  "nav.about": "About",
+  "nav.skills": "Skills",
+  "nav.projects": "Projects",
+  "nav.experience": "Experience",
+  "nav.contact": "Contact",
+  "nav.hireMe": "Hire Me",
+
+  "hero.tagline": "Real Estate & Property Web Specialist",
+  "hero.title": "Building digital experiences for the real estate industry",
+  "hero.subtitle": "I'm M.Said — a senior frontend engineer with 5+ years of experience crafting fast, accessible, bilingual property platforms.",
+  "hero.cta.projects": "View Projects",
+  "hero.cta.contact": "Get in Touch",
+  "hero.stat.projects": "Projects Delivered",
+  "hero.stat.repos": "Open Source Repos",
+  "hero.stat.years": "Years Experience",
+
+  "about.title": "About Me",
+  "about.kicker": "Who I am",
+  "about.p1": "I'm Mostafa Said, a passionate frontend developer specialized in building real estate and property platforms — from MLS-style listing portals to agent CRMs and virtual tour viewers.",
+  "about.p2": "I focus on performance, accessibility, and bilingual experiences (EN/AR with full RTL). My stack centers on React, TypeScript, and modern animation tooling, paired with a strong design sensibility.",
+  "about.download": "Download Resume",
+
+  "skills.title": "Skills & Stack",
+  "skills.kicker": "What I work with",
+  "skills.frontend": "Frontend",
+  "skills.tooling": "Tooling & DX",
+  "skills.design": "Design & UX",
+  "skills.backend": "Backend & Cloud",
+
+  "projects.title": "Featured Projects",
+  "projects.kicker": "Real estate & property work",
+  "projects.filter.all": "All",
+  "projects.filter.listing": "Listings",
+  "projects.filter.dashboard": "Dashboards",
+  "projects.filter.mobile": "Mobile",
+  "projects.filter.tools": "Tools",
+  "projects.view": "View Details",
+  "projects.live": "Live Demo",
+  "projects.code": "Source Code",
+  "projects.back": "Back to projects",
+  "projects.prev": "Previous",
+  "projects.next": "Next",
+  "projects.tech": "Tech Stack",
+  "projects.overview": "Overview",
+
+  "experience.title": "Experience",
+  "experience.kicker": "5+ years building for the web",
+
+  "education.title": "Education & Certifications",
+
+  "contact.title": "Let's work together",
+  "contact.kicker": "Get in touch",
+  "contact.subtitle": "Have a real estate project in mind? Send a message and I'll get back to you within 24 hours.",
+  "contact.name": "Your Name",
+  "contact.email": "Email Address",
+  "contact.message": "Message",
+  "contact.send": "Send Message",
+  "contact.sending": "Sending...",
+  "contact.success": "Message sent! I'll reply soon.",
+  "contact.errors.name": "Please enter your name",
+  "contact.errors.email": "Please enter a valid email",
+  "contact.errors.message": "Message must be at least 10 characters",
+
+  "footer.rights": "All rights reserved.",
+  "footer.built": "Built with React, TypeScript & Tailwind",
+
+  "theme.toggle": "Toggle theme",
+  "lang.toggle": "Switch language",
+};
+
+const ar: Record<keyof typeof en, string> = {
+  "nav.home": "الرئيسية",
+  "nav.about": "نبذة",
+  "nav.skills": "المهارات",
+  "nav.projects": "المشاريع",
+  "nav.experience": "الخبرة",
+  "nav.contact": "تواصل",
+  "nav.hireMe": "وظّفني",
+
+  "hero.tagline": "متخصص في مواقع العقارات والممتلكات",
+  "hero.title": "أبني تجارب رقمية متميزة لقطاع العقارات",
+  "hero.subtitle": "أنا م.سعيد — مهندس واجهات أمامية بخبرة تزيد عن 5 سنوات في تطوير منصات عقارية سريعة وسهلة الوصول وثنائية اللغة.",
+  "hero.cta.projects": "عرض المشاريع",
+  "hero.cta.contact": "تواصل معي",
+  "hero.stat.projects": "مشروع منجز",
+  "hero.stat.repos": "مستودع مفتوح المصدر",
+  "hero.stat.years": "سنوات خبرة",
+
+  "about.title": "نبذة عني",
+  "about.kicker": "من أنا",
+  "about.p1": "أنا مصطفى سعيد، مطور واجهات أمامية شغوف ومتخصص في بناء منصات العقارات — من بوابات القوائم على غرار MLS إلى لوحات تحكم الوكلاء وعارضات الجولات الافتراضية.",
+  "about.p2": "أركّز على الأداء وإمكانية الوصول والتجارب ثنائية اللغة (عربي/إنجليزي بدعم كامل لاتجاه RTL). أعتمد على React وTypeScript وأحدث أدوات الحركة، مع حس تصميم قوي.",
+  "about.download": "تحميل السيرة الذاتية",
+
+  "skills.title": "المهارات والتقنيات",
+  "skills.kicker": "ما أستخدمه",
+  "skills.frontend": "الواجهة الأمامية",
+  "skills.tooling": "الأدوات والتطوير",
+  "skills.design": "التصميم والتجربة",
+  "skills.backend": "الخلفية والسحابة",
+
+  "projects.title": "المشاريع المميزة",
+  "projects.kicker": "أعمال في مجال العقارات",
+  "projects.filter.all": "الكل",
+  "projects.filter.listing": "قوائم",
+  "projects.filter.dashboard": "لوحات تحكم",
+  "projects.filter.mobile": "تطبيقات جوال",
+  "projects.filter.tools": "أدوات",
+  "projects.view": "تفاصيل المشروع",
+  "projects.live": "عرض مباشر",
+  "projects.code": "الكود المصدري",
+  "projects.back": "العودة للمشاريع",
+  "projects.prev": "السابق",
+  "projects.next": "التالي",
+  "projects.tech": "التقنيات",
+  "projects.overview": "نظرة عامة",
+
+  "experience.title": "الخبرة المهنية",
+  "experience.kicker": "خمس سنوات في تطوير الويب",
+
+  "education.title": "التعليم والشهادات",
+
+  "contact.title": "لنعمل معاً",
+  "contact.kicker": "تواصل معي",
+  "contact.subtitle": "لديك مشروع عقاري؟ أرسل رسالة وسأرد خلال 24 ساعة.",
+  "contact.name": "الاسم",
+  "contact.email": "البريد الإلكتروني",
+  "contact.message": "الرسالة",
+  "contact.send": "إرسال الرسالة",
+  "contact.sending": "جاري الإرسال...",
+  "contact.success": "تم الإرسال! سأرد قريباً.",
+  "contact.errors.name": "الرجاء إدخال الاسم",
+  "contact.errors.email": "الرجاء إدخال بريد صحيح",
+  "contact.errors.message": "يجب أن تكون الرسالة 10 أحرف على الأقل",
+
+  "footer.rights": "جميع الحقوق محفوظة.",
+  "footer.built": "تم البناء باستخدام React وTypeScript وTailwind",
+
+  "theme.toggle": "تبديل المظهر",
+  "lang.toggle": "تبديل اللغة",
+};
+
+export const translations = { en, ar };
+export type TranslationKey = keyof typeof en;
