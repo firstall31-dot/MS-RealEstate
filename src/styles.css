@@ -123,7 +123,34 @@
 
 @layer base {
   * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  html { 
+    scroll-behavior: smooth;
+    
+    /* Scrollbar styling */
+    scrollbar-color: var(--primary) var(--background);
+    scrollbar-width: thin;
+  }
+  
+  /* Webkit scrollbar (Chrome, Safari, Edge) */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 5px;
+    border: 2px solid var(--background);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--gold);
+  }
+  
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
