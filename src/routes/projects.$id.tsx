@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ExternalLink, Github } from "lucide-react";
 import { getProject, projects } from "@/lib/projects-data";
@@ -7,48 +7,36 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/projects/$id")({
-  loader: ({ params }) => {
-    const project = getProject(params.id);
-    if (!project) throw notFound();
-    return { project };
-  },
-  head: ({ loaderData, params }) => {
-    const p = loaderData?.project;
-    const title = p ? `${p.title.en} — M.Said` : "Project — M.Said";
-    const desc = p?.short.en ?? "Real estate project by Mostafa Said.";
-    const url = `/projects/${params.id}`;
-    return {
-      meta: [
-        { title },
-        { name: "description", content: desc },
-        { property: "og:title", content: title },
-        { property: "og:description", content: desc },
-        { property: "og:type", content: "article" },
-        { property: "og:url", content: url },
-        { property: "og:image", content: p?.image ?? "" },
-        { name: "twitter:card", content: "summary_large_image" },
-      ],
-      links: [{ rel: "canonical", href: url }],
-    };
-  },
   component: ProjectPage,
   notFoundComponent: () => (
     <div className="min-h-dvh flex items-center justify-center pt-20">
       <div className="text-center">
         <h1 className="text-4xl font-bold">Project not found</h1>
-        <Link to="/" className="mt-4 inline-block text-gold underline">Go home</Link>
+        <Link to="/" className="mt-4 inline-block text-gold underline">
+          Go home
+        </Link>
       </div>
-    </div>
-  ),
-  errorComponent: ({ reset }) => (
-    <div className="min-h-dvh flex items-center justify-center">
-      <button onClick={reset} className="text-gold underline">Try again</button>
     </div>
   ),
 });
 
 function ProjectPage() {
-  const { project } = Route.useLoaderData();
+  const { id } = Route.useParams();
+  const project = getProject(id);
+  
+  if (!project) {
+    return (
+      <div className="min-h-dvh flex items-center justify-center pt-20">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold">Project not found</h1>
+          <Link to="/" className="mt-4 inline-block text-gold underline">
+            Go home
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   const { t, lang, dir } = useI18n();
 
   const idx = projects.findIndex((p) => p.id === project.id);
@@ -60,7 +48,11 @@ function ProjectPage() {
   return (
     <article className="pt-24 pb-20">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <Link to="/" hash="projects" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6">
+        <Link
+          to="/"
+          hash="projects"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6"
+        >
           <Arrow className="h-4 w-4" /> {t("projects.back")}
         </Link>
 
@@ -98,7 +90,9 @@ function ProjectPage() {
               <h3 className="font-semibold mb-3">{t("projects.tech")}</h3>
               <ul className="flex flex-wrap gap-2">
                 {project.tech.map((tech: string) => (
-                  <li key={tech} className="text-xs px-2.5 py-1 rounded-full bg-muted font-medium">{tech}</li>
+                  <li key={tech} className="text-xs px-2.5 py-1 rounded-full bg-muted font-medium">
+                    {tech}
+                  </li>
                 ))}
               </ul>
             </aside>
