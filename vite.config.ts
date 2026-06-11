@@ -14,5 +14,8 @@ export default defineConfig({
     minify: "terser",
     outDir: "dist",
     sourcemap: false,
+    rollupOptions: {
+      external: [],
+    },
   },
 });

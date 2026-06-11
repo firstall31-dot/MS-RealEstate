@@ -1,15 +1,10 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
-  createRootRouteWithContext,
-  useRouter,
-  HeadContent,
-  Scripts,
+  createRootRoute,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
 
-import appCss from "../styles.css?url";
-import { reportError } from "../lib/error-reporting
+import { reportError } from "../lib/error-reporting";
 import { ThemeProvider } from "@/lib/theme";
 import { I18nProvider } from "@/lib/i18n";
 import { Navbar } from "@/components/layout/Navbar";
@@ -34,12 +29,9 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error }: { error: Error }) {
   console.error(error);
-  const router = useRouter();
-  useEffect(() => {
-    reportError(error, { boundary: "root_error_component" });
-  }, [error]);
+  reportError(error, { boundary: "root_error_component" });
   return (
     <div className="flex min-h-dvh items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
@@ -47,7 +39,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         <p className="mt-2 text-sm text-muted-foreground">Something went wrong.</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
-            onClick={() => { router.invalidate(); reset(); }}
+            onClick={() => window.location.reload()}
             className="rounded-full bg-gradient-gold text-gold-foreground px-5 py-2 text-sm font-semibold shadow-gold"
           >
             Try again
@@ -58,76 +50,15 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "M.Said — Real Estate Frontend Developer" },
-      { name: "description", content: "Portfolio of Mostafa Said — senior frontend engineer specializing in real estate platforms." },
-      { name: "author", content: "Mostafa Said" },
-      { property: "og:site_name", content: "M.Said Portfolio" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "M.Said — Real Estate Frontend Developer" },
-      { name: "twitter:title", content: "M.Said — Real Estate Frontend Developer" },
-      { property: "og:description", content: "Portfolio of Mostafa Said — senior frontend engineer specializing in real estate platforms." },
-      { name: "twitter:description", content: "Portfolio of Mostafa Said — senior frontend engineer specializing in real estate platforms." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/286b056a-0b4b-4f66-be64-effd71764a21/id-preview-b73c858c--5d30ae11-1134-4b8a-a914-2109c49c5c54.lovable.app-1780194676925.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/286b056a-0b4b-4f66-be64-effd71764a21/id-preview-b73c858c--5d30ae11-1134-4b8a-a914-2109c49c5c54.lovable.app-1780194676925.png" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap",
-      },
-    ],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Person",
-          name: "Mostafa Said",
-          alternateName: "M.Said",
-          jobTitle: "Senior Frontend Developer",
-          url: "https://github.com/Mostafa-SAID7",
-          sameAs: [
-            "https://github.com/Mostafa-SAID7",
-            "https://www.linkedin.com/in/mostafasamirsaid",
-            "https://www.facebook.com/MostafaSaid94",
-          ],
-        }),
-      },
-    ],
-  }),
-  shellComponent: RootShell,
+export const Route = createRootRoute()({
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
 
-function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
-
 function RootComponent() {
-  const { queryClient } = Route.useRouteContext();
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={new QueryClient()}>
       <ThemeProvider>
         <I18nProvider>
           <Navbar />
