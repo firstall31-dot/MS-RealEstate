@@ -5,13 +5,14 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
-   Mostafa Said — Real Estate Portfolio Design System
-   Palette: Deep navy + warm gold luxury aesthetic
+   Mostafa Said — Real Estate Agent Portfolio Design System
+   Palette: Warm amber + cream + espresso, editorial serif display
    All colors in oklch.
 ============================================================ */
 
 @theme inline {
   --font-sans: "Inter", "Tajawal", system-ui, sans-serif;
+  --font-serif: "Fraunces", "Georgia", serif;
   --font-arabic: "Tajawal", "Cairo", system-ui, sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -48,77 +49,80 @@
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 1rem;
 
-  --background: oklch(0.99 0.005 250);
-  --foreground: oklch(0.18 0.04 260);
+  /* Warm cream page */
+  --background: oklch(0.975 0.014 78);
+  --foreground: oklch(0.24 0.03 55);
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.04 260);
+  --card: oklch(0.995 0.006 80);
+  --card-foreground: oklch(0.24 0.03 55);
 
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.04 260);
+  --popover: oklch(0.995 0.006 80);
+  --popover-foreground: oklch(0.24 0.03 55);
 
-  --primary: oklch(0.28 0.07 260);
-  --primary-foreground: oklch(0.98 0.005 250);
+  /* Warm amber brand */
+  --primary: oklch(0.70 0.145 62);
+  --primary-foreground: oklch(0.99 0.01 80);
 
-  --secondary: oklch(0.96 0.01 250);
-  --secondary-foreground: oklch(0.22 0.05 260);
+  --secondary: oklch(0.95 0.02 76);
+  --secondary-foreground: oklch(0.30 0.04 55);
 
-  --muted: oklch(0.96 0.01 250);
-  --muted-foreground: oklch(0.50 0.03 260);
+  --muted: oklch(0.945 0.018 78);
+  --muted-foreground: oklch(0.52 0.03 58);
 
-  --accent: oklch(0.94 0.04 85);
-  --accent-foreground: oklch(0.22 0.05 260);
+  --accent: oklch(0.90 0.055 74);
+  --accent-foreground: oklch(0.30 0.05 55);
 
-  --gold: oklch(0.78 0.14 78);
-  --gold-foreground: oklch(0.18 0.04 260);
+  --gold: oklch(0.72 0.145 62);
+  --gold-foreground: oklch(0.99 0.01 80);
 
   --destructive: oklch(0.58 0.22 27);
   --destructive-foreground: oklch(0.98 0 0);
 
-  --border: oklch(0.91 0.012 255);
-  --input: oklch(0.91 0.012 255);
-  --ring: oklch(0.78 0.14 78);
+  --border: oklch(0.90 0.02 72);
+  --input: oklch(0.90 0.02 72);
+  --ring: oklch(0.70 0.145 62);
 
-  --gradient-hero: linear-gradient(135deg, oklch(0.28 0.07 260) 0%, oklch(0.20 0.06 270) 60%, oklch(0.14 0.04 265) 100%);
-  --gradient-gold: linear-gradient(135deg, oklch(0.82 0.14 80) 0%, oklch(0.72 0.16 65) 100%);
+  --gradient-hero: linear-gradient(150deg, oklch(0.82 0.11 78) 0%, oklch(0.74 0.15 64) 45%, oklch(0.64 0.16 52) 100%);
+  --gradient-gold: linear-gradient(135deg, oklch(0.78 0.14 72) 0%, oklch(0.68 0.16 55) 100%);
 }
 
 .dark {
-  --background: oklch(0.13 0.02 265);
-  --foreground: oklch(0.97 0.005 250);
+  /* Deep espresso */
+  --background: oklch(0.20 0.02 50);
+  --foreground: oklch(0.96 0.012 78);
 
-  --card: oklch(0.17 0.03 265);
-  --card-foreground: oklch(0.97 0.005 250);
+  --card: oklch(0.25 0.025 52);
+  --card-foreground: oklch(0.96 0.012 78);
 
-  --popover: oklch(0.17 0.03 265);
-  --popover-foreground: oklch(0.97 0.005 250);
+  --popover: oklch(0.25 0.025 52);
+  --popover-foreground: oklch(0.96 0.012 78);
 
-  --primary: oklch(0.78 0.14 78);
-  --primary-foreground: oklch(0.15 0.03 265);
+  --primary: oklch(0.76 0.15 64);
+  --primary-foreground: oklch(0.22 0.03 50);
 
-  --secondary: oklch(0.22 0.03 265);
-  --secondary-foreground: oklch(0.97 0.005 250);
+  --secondary: oklch(0.30 0.03 52);
+  --secondary-foreground: oklch(0.96 0.012 78);
 
-  --muted: oklch(0.22 0.03 265);
-  --muted-foreground: oklch(0.68 0.02 260);
+  --muted: oklch(0.30 0.025 52);
+  --muted-foreground: oklch(0.74 0.03 70);
 
-  --accent: oklch(0.25 0.05 80);
-  --accent-foreground: oklch(0.97 0.005 250);
+  --accent: oklch(0.36 0.06 60);
+  --accent-foreground: oklch(0.96 0.012 78);
 
-  --gold: oklch(0.80 0.14 80);
-  --gold-foreground: oklch(0.15 0.03 265);
+  --gold: oklch(0.78 0.15 66);
+  --gold-foreground: oklch(0.22 0.03 50);
 
   --destructive: oklch(0.65 0.22 25);
   --destructive-foreground: oklch(0.98 0 0);
 
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.80 0.14 80);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.78 0.15 66);
 
-  --gradient-hero: linear-gradient(135deg, oklch(0.16 0.04 265) 0%, oklch(0.12 0.03 270) 60%, oklch(0.10 0.02 265) 100%);
-  --gradient-gold: linear-gradient(135deg, oklch(0.82 0.14 80) 0%, oklch(0.72 0.16 65) 100%);
+  --gradient-hero: linear-gradient(150deg, oklch(0.58 0.14 60) 0%, oklch(0.46 0.14 52) 55%, oklch(0.34 0.09 48) 100%);
+  --gradient-gold: linear-gradient(135deg, oklch(0.80 0.14 68) 0%, oklch(0.70 0.16 56) 100%);
 }
 
 @layer base {
@@ -158,7 +162,15 @@
     -webkit-font-smoothing: antialiased;
   }
   html[dir="rtl"] body { font-family: var(--font-arabic); }
-  h1,h2,h3,h4 { letter-spacing: -0.02em; }
+  h1,h2,h3,h4 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
+    font-weight: 500;
+  }
+  html[dir="rtl"] h1,
+  html[dir="rtl"] h2,
+  html[dir="rtl"] h3,
+  html[dir="rtl"] h4 { font-family: var(--font-arabic); }
 }
 
 @layer utilities {
@@ -178,4 +190,22 @@
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
   }
+  .font-display { font-family: var(--font-serif); }
+  .bg-noise {
+    background-image: radial-gradient(color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
 }
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float { animation: float-slow 5s ease-in-out infinite; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 26s linear infinite; }
+.animate-marquee:hover { animation-play-state: paused; }
