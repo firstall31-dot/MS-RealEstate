@@ -1,18 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, ExternalLink, Github } from "lucide-react";
-import { getProject, projects } from "@/lib/projects-data";
+import { ArrowLeft, ArrowRight, BedDouble, Bath, Maximize, MapPin, Check, Phone } from "lucide-react";
+import { getProperty, properties } from "@/lib/projects-data";
 import { useI18n } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/projects/$id")({
-  component: ProjectPage,
+  component: PropertyPage,
   notFoundComponent: () => (
-    <div className="min-h-dvh flex items-center justify-center pt-20">
+    <div className="flex min-h-dvh items-center justify-center pt-20">
       <div className="text-center">
-        <h1 className="text-4xl font-bold">Project not found</h1>
-        <Link to="/" className="mt-4 inline-block text-gold underline">
+        <h1 className="font-display text-4xl">Property not found</h1>
+        <Link to="/" className="mt-4 inline-block text-primary underline">
           Go home
         </Link>
       </div>
@@ -20,16 +20,17 @@ export const Route = createFileRoute("/projects/$id")({
   ),
 });
 
-function ProjectPage() {
+function PropertyPage() {
   const { id } = Route.useParams();
-  const project = getProject(id);
-  
-  if (!project) {
+  const { t, lang, dir } = useI18n();
+  const property = getProperty(id);
+
+  if (!property) {
     return (
-      <div className="min-h-dvh flex items-center justify-center pt-20">
+      <div className="flex min-h-dvh items-center justify-center pt-20">
         <div className="text-center">
-          <h1 className="text-4xl font-bold">Project not found</h1>
-          <Link to="/" className="mt-4 inline-block text-gold underline">
+          <h1 className="font-display text-4xl">Property not found</h1>
+          <Link to="/" className="mt-4 inline-block text-primary underline">
             Go home
           </Link>
         </div>
@@ -37,61 +38,84 @@ function ProjectPage() {
     );
   }
 
-  const { t, lang, dir } = useI18n();
-
-  const idx = projects.findIndex((p) => p.id === project.id);
-  const prev = projects[(idx - 1 + projects.length) % projects.length];
-  const next = projects[(idx + 1) % projects.length];
-  const Arrow = dir === "rtl" ? ArrowRight : ArrowLeft;
+  const idx = properties.findIndex((p) => p.id === property.id);
+  const prev = properties[(idx - 1 + properties.length) % properties.length];
+  const next = properties[(idx + 1) % properties.length];
+  const BackArrow = dir === "rtl" ? ArrowRight : ArrowLeft;
   const FwdArrow = dir === "rtl" ? ArrowLeft : ArrowRight;
 
+  const specs = [
+    { icon: BedDouble, value: property.beds, label: t("properties.beds") },
+    { icon: Bath, value: property.baths, label: t("properties.baths") },
+    { icon: Maximize, value: property.sqft, label: t("properties.sqft") },
+  ];
+
   return (
-    <article className="pt-24 pb-20">
+    <article className="pb-20 pt-24">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <Link
           to="/"
-          hash="projects"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6"
+          hash="properties"
+          className="mb-6 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
         >
-          <Arrow className="h-4 w-4" /> {t("projects.back")}
+          <BackArrow className="h-4 w-4" /> {t("properties.back")}
         </Link>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">{project.title[lang]}</h1>
-          <p className="mt-4 text-lg text-muted-foreground">{project.short[lang]}</p>
-
-          <div className="mt-6 flex flex-wrap gap-3">
-            {project.liveUrl && (
-              <Button asChild className="rounded-full bg-gradient-gold text-gold-foreground hover:opacity-90 shadow-gold">
-                <a href={project.liveUrl} target="_blank" rel="noreferrer">
-                  <ExternalLink className="h-4 w-4" /> {t("projects.live")}
-                </a>
-              </Button>
-            )}
-            {project.codeUrl && (
-              <Button asChild variant="outline" className="rounded-full">
-                <a href={project.codeUrl} target="_blank" rel="noreferrer">
-                  <Github className="h-4 w-4" /> {t("projects.code")}
-                </a>
-              </Button>
-            )}
+          <div className="flex flex-wrap items-center gap-3">
+            <span
+              className={cn(
+                "rounded-full px-3 py-1 text-xs font-semibold",
+                property.status === "sold"
+                  ? "bg-foreground/90 text-background"
+                  : "bg-primary text-primary-foreground",
+              )}
+            >
+              {property.status === "sold" ? t("properties.status.sold") : t("properties.status.active")}
+            </span>
+            <span className="flex items-center gap-1 text-sm text-muted-foreground">
+              <MapPin className="h-4 w-4" /> {property.location[lang]}
+            </span>
           </div>
 
-          <div className="mt-10 rounded-3xl overflow-hidden border border-border shadow-xl">
-            <img src={project.image} alt={project.title[lang]} width={1280} height={832} className="w-full h-auto" />
+          <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
+            <h1 className="max-w-2xl text-balance font-display text-3xl leading-tight sm:text-5xl">
+              {property.title[lang]}
+            </h1>
+            <p className="font-display text-3xl font-semibold text-primary">{property.price}</p>
           </div>
 
-          <div className="mt-10 grid md:grid-cols-[1fr_280px] gap-8">
+          <div className="mt-8 overflow-hidden rounded-3xl border border-border shadow-xl">
+            <img src={property.image} alt={property.title[lang]} className="h-auto w-full object-cover" />
+          </div>
+
+          <div className="mt-6 grid grid-cols-3 gap-3">
+            {specs.map((s) => (
+              <div key={s.label} className="rounded-2xl border border-border bg-card p-4 text-center">
+                <s.icon className="mx-auto h-5 w-5 text-primary" />
+                <p className="mt-2 font-display text-xl font-semibold">{s.value}</p>
+                <p className="text-xs text-muted-foreground">{s.label}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 grid gap-8 md:grid-cols-[1fr_280px]">
             <div>
-              <h2 className="text-2xl font-bold">{t("projects.overview")}</h2>
-              <p className="mt-4 text-base leading-relaxed text-foreground/90">{project.description[lang]}</p>
+              <h2 className="font-display text-2xl">{t("properties.overview")}</h2>
+              <p className="mt-4 text-base leading-relaxed text-foreground/90">{property.description[lang]}</p>
+              <Button asChild className="mt-6 rounded-full bg-foreground text-background hover:bg-foreground/90" size="lg">
+                <Link to="/" hash="contact">
+                  <Phone className="h-4 w-4" /> {t("properties.enquire")}
+                </Link>
+              </Button>
             </div>
-            <aside className="rounded-2xl bg-card border border-border p-6 shadow-lg h-fit">
-              <h3 className="font-semibold mb-3">{t("projects.tech")}</h3>
-              <ul className="flex flex-wrap gap-2">
-                {project.tech.map((tech: string) => (
-                  <li key={tech} className="text-xs px-2.5 py-1 rounded-full bg-muted font-medium">
-                    {tech}
+            <aside className="h-fit rounded-3xl border border-border bg-card p-6 shadow-sm">
+              <h3 className="mb-3 font-display text-lg">{t("properties.details")}</h3>
+              <ul className="space-y-2.5">
+                {property.features[lang].map((f) => (
+                  <li key={f} className="flex items-start gap-2 text-sm">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    {f}
                   </li>
                 ))}
               </ul>
@@ -99,28 +123,33 @@ function ProjectPage() {
           </div>
         </motion.div>
 
-        <nav className="mt-16 grid sm:grid-cols-2 gap-4">
+        <nav className="mt-16 grid gap-4 sm:grid-cols-2">
           <Link
             to="/projects/$id"
             params={{ id: prev.id }}
-            className="group rounded-2xl border border-border p-5 hover:border-gold/50 hover:shadow-lg transition-all bg-card"
+            className="group rounded-3xl border border-border bg-card p-5 transition-all hover:border-primary/50 hover:shadow-lg"
           >
-            <p className="text-xs text-muted-foreground flex items-center gap-2">
-              <Arrow className={cn("h-3 w-3 transition-transform group-hover:-translate-x-1", dir === "rtl" && "rotate-180 group-hover:translate-x-1")} />
-              {t("projects.prev")}
+            <p className="flex items-center gap-2 text-xs text-muted-foreground">
+              <BackArrow
+                className={cn(
+                  "h-3 w-3 transition-transform group-hover:-translate-x-1",
+                  dir === "rtl" && "rotate-180 group-hover:translate-x-1",
+                )}
+              />
+              {t("properties.prev")}
             </p>
-            <p className="mt-2 font-bold">{prev.title[lang]}</p>
+            <p className="mt-2 font-display font-semibold">{prev.title[lang]}</p>
           </Link>
           <Link
             to="/projects/$id"
             params={{ id: next.id }}
-            className="group rounded-2xl border border-border p-5 hover:border-gold/50 hover:shadow-lg transition-all text-end bg-card"
+            className="group rounded-3xl border border-border bg-card p-5 text-end transition-all hover:border-primary/50 hover:shadow-lg"
           >
-            <p className="text-xs text-muted-foreground flex items-center justify-end gap-2">
-              {t("projects.next")}
+            <p className="flex items-center justify-end gap-2 text-xs text-muted-foreground">
+              {t("properties.next")}
               <FwdArrow className="h-3 w-3 transition-transform group-hover:translate-x-1" />
             </p>
-            <p className="mt-2 font-bold">{next.title[lang]}</p>
+            <p className="mt-2 font-display font-semibold">{next.title[lang]}</p>
           </Link>
         </nav>
       </div>

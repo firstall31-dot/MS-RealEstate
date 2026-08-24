@@ -1,8 +1,8 @@
-import { Github, Linkedin, Facebook, MessageCircle, Mail } from "lucide-react";
+import { Instagram, Linkedin, Facebook, MessageCircle, Mail } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
 export const socials = [
-  { name: "GitHub", icon: Github, href: "https://github.com/Mostafa-SAID7" },
+  { name: "Instagram", icon: Instagram, href: "https://instagram.com" },
   { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/mostafasamirsaid" },
   { name: "Facebook", icon: Facebook, href: "https://www.facebook.com/MostafaSaid94" },
   { name: "WhatsApp", icon: MessageCircle, href: "https://wa.me/201067358073" },
@@ -14,12 +14,17 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-card/40 mt-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+    <footer className="mt-8 border-t border-border bg-card/40">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 py-10 sm:flex-row sm:px-6 lg:px-8">
         <div className="text-center sm:text-start">
-          <p className="font-semibold">M.Said — Mostafa Said</p>
-          <p className="text-sm text-muted-foreground mt-1">
-            © {year} {t("footer.rights")} • {t("footer.built")}
+          <div className="flex items-center justify-center gap-2 sm:justify-start">
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-foreground font-display text-xs font-bold text-background">
+              MS
+            </span>
+            <p className="font-display text-lg font-semibold">Mostafa Said</p>
+          </div>
+          <p className="mt-2 text-sm text-muted-foreground">
+            © {year} Mostafa Said. {t("footer.rights")} • {t("footer.built")}
           </p>
         </div>
         <ul className="flex items-center gap-2">
@@ -30,7 +35,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.name}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border hover:border-primary hover:text-primary transition-colors"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
               >
                 <s.icon className="h-4 w-4" />
               </a>
